@@ -1,0 +1,34 @@
+/venv/
+venv/
+__pycache__/
+.git/*
+
+**/__pycache__/
+
+migraions/__pycache__
+
+db.sqlite3
+*.sqlite3
+
+*.py[cod]
+
+/migrations
+/migrations/
+.idea
+.DS_Store
+.AppleDouble
+.LSOverride
+
+*.sublime-project
+*.sublime-workspace
+
+.env
+debug.log
+test*.docx
+test*.json
+
+# exclude everything
+pgdata/*
+
+# exception to the rule
+!pgdata/.gitkeep
