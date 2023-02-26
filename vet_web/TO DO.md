@@ -52,7 +52,7 @@ username@box-123456:~$ sudo su - postgres
 postgres@box-123456:~$ psql 
 
 postgres=# CREATE DATABASE vetweb_db;
-postgres=# GRANT ALL PRIVILEGES ON DATABASE vetweb_db to pavkul;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE vetweb_db to username;
 ```
 * В settings.py внести изменения:
 ```
