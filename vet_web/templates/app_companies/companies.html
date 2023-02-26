@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div id="colorlib-services">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+					<h2>Предприятия</h2>
+					<p><a class="btn btn-primary btn-lg" href="{% url 'add_company' %}">Добавить предприятие</a>
+                                    </p>
+				</div>
+			</div>
+			<div class="row">
+				{% if companies %}
+				{% if companies|length > 1 %}
+				{% for company in companies %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="{% url 'company_detail' company.slug %}">{{company.short_name}}</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="{% url 'company_detail' companies.first.slug %}">{{companies.first.short_name}}</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% endif %}
+
+			</div>
+		</div>
+</div>
+{% endblock %}

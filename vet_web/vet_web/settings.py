@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'app_users.apps.AppUsersConfig',
+    'app_companies.apps.AppCompaniesConfig',
+
     # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/admindocs/
     'django.contrib.admindocs',
 

@@ -34,12 +34,13 @@
 							<div class="menu-1">
 								<ul>
 									<li class="active"><a href="{% url 'home' %}">Home</a></li>
-									<li class="has-dropdown">
-										<a href="doctors.html">Doctors</a>
-										<ul class="dropdown">
-											<li><a href="doctors-single.html">Single Doctor</a></li>
-										</ul>
-									</li>
+									<li><a href="{% url 'companies' %}">Предприятия</a></li>
+<!--									<li class="has-dropdown">-->
+<!--										<a href="{% url 'companies' %}">Предприятия</a>-->
+<!--										<ul class="dropdown">-->
+<!--											<li><a href="doctors-single.html">Single Doctor</a></li>-->
+<!--										</ul>-->
+<!--									</li>-->
 									<li><a href="services.html">Services</a></li>
 									<li class="has-dropdown">
 										<a href="departments.html">Departments</a>
@@ -63,7 +64,9 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-							<p class="btn-cta"><a href="appointment.html"><span>Make an Appointment <i class="icon-calendar3"></i></span></a></p>
+							{% if request.user.is_authenticated %}
+							<p class="btn-cta"><a href="{% url 'logout' %}"><span>Выйти<i class="icon-calendar3"></i></span></a></p>
+							{% endif %}
 						</div>
 					</div>
 				</div>
