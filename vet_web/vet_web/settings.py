@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # https://www.django-rest-framework.org/
     'rest_framework',
+    'pytils',
 
 
 ]
