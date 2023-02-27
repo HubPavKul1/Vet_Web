@@ -26,6 +26,7 @@ docutils==0.18.1
 drf-yasg==1.20.0
 psycopg2==2.9.3
 environs==9.5.0
+pytils==0.4.1
 ```
 * Создать проект
 ```
@@ -267,7 +268,6 @@ python manage.py startapp app_companies
 * Модели приложения: 
 ```
 from django.db import models
-from django.db.models.fields import related
 from django.urls import reverse
 
 
@@ -315,6 +315,7 @@ class Company(models.Model):
                             verbose_name='url',
                             help_text='unique url fragment based on the company short_name'
                             )
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.short_name
@@ -360,10 +361,6 @@ class Address(models.Model):
 
 class Position(models.Model):
     """ Модель должность работника """
-    company = models.ForeignKey(Company,
-                                verbose_name='предприятие',
-                                on_delete=models.CASCADE,
-                                related_name='positions')
     name = models.CharField(max_length=100, verbose_name='должность', blank=True)
 
     def __str__(self):
@@ -377,6 +374,12 @@ class Position(models.Model):
 
 class Employee(models.Model):
     """ Модель сотрудник предприятия """
+    company = models.ForeignKey(Company,
+                                verbose_name='предприятие',
+                                on_delete=models.CASCADE,
+                                related_name='positions',
+                                null=True
+                                )
     position = models.ForeignKey(Position,
                                  verbose_name='должность',
                                  on_delete=models.CASCADE,
@@ -392,6 +395,7 @@ class Employee(models.Model):
                                   verbose_name='отчество',
                                   blank=True)
     full_name = models.CharField(max_length=200, verbose_name='ФИО', blank=True)  # автозаполнение из предыдущих полей
+    available = models.BooleanField(default=True)
 
     slug = models.SlugField(max_length=255,
                             verbose_name='url',
@@ -410,6 +414,8 @@ class Employee(models.Model):
         verbose_name_plural = 'employees'
 
 ```
+
+
 
 * app_animals ```python manage.py startapp app_animals```
 * app_drugs ```python manage.py startapp app_drugs```

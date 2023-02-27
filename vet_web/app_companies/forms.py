@@ -18,3 +18,5 @@ class CreateCompanyForm(ModelForm):
                 }),
         }
 
+class UpdateCompanyForm(ModelForm):
+    pass

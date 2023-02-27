@@ -26,7 +26,7 @@ class CreateCompanyView(LoginRequiredMixin, CreateView):
                      'header': 'Добавить предприятие'
                      }
     raise_exception = True
-    success_url = reverse_lazy('companies')
+    # success_url = reverse_lazy('companies')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -34,6 +34,9 @@ class CreateCompanyView(LoginRequiredMixin, CreateView):
         self.object.save()
         messages.success(self.request, "Предприятие успешно создано")
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('company_detail', kwargs={'slug': self.object.slug})
 
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
