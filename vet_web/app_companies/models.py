@@ -69,7 +69,8 @@ class Address(models.Model):
                                related_name='address')
     company = models.ForeignKey(Company,
                                 verbose_name='предприятие',
-                                null=True, on_delete=models.CASCADE,
+                                null=True,
+                                on_delete=models.CASCADE,
                                 related_name='address')
     house_number = models.CharField(max_length=10,
                                     verbose_name='номер дома',
@@ -78,7 +79,7 @@ class Address(models.Model):
                                       verbose_name='телефон 1',
                                       blank=True)
     phone_number_2 = models.CharField(max_length=12,
-                                      verbose_name='телефон 1',
+                                      verbose_name='телефон 2',
                                       blank=True)
 
     def __str__(self):
@@ -108,13 +109,14 @@ class Employee(models.Model):
     company = models.ForeignKey(Company,
                                 verbose_name='предприятие',
                                 on_delete=models.CASCADE,
-                                related_name='positions',
+                                related_name='employees',
                                 null=True
                                 )
     position = models.ForeignKey(Position,
                                  verbose_name='должность',
                                  on_delete=models.CASCADE,
-                                 related_name='employees')
+                                 related_name='employees'
+                                 )
 
     last_name = models.CharField(max_length=255,
                                  verbose_name='фамилия',
@@ -125,19 +127,19 @@ class Employee(models.Model):
     patronymic = models.CharField(max_length=255,
                                   verbose_name='отчество',
                                   blank=True)
-    full_name = models.CharField(max_length=200, verbose_name='ФИО', blank=True)  # автозаполнение из предыдущих полей
+    # full_name = models.CharField(max_length=200, verbose_name='ФИО', blank=True)  # автозаполнение из предыдущих полей
     available = models.BooleanField(default=True)
 
-    slug = models.SlugField(max_length=255,
-                            verbose_name='url',
-                            help_text='unique url fragment based on the employee full_name'
-                            )
+    # slug = models.SlugField(max_length=255,
+    #                         verbose_name='url',
+    #                         help_text='unique url fragment based on the employee full_name'
+    #                         )
 
     def __str__(self):
-        return self.full_name
+        return self.full_name()
 
-    def get_absolute_url(self):
-        return reverse('employee_detail', kwargs={'slug': self.slug})
+    def full_name(self):
+        return f'{self.last_name} {self.first_name[0]}.{self.patronymic[0]}.'
 
     class Meta:
         db_table = 'employees'

@@ -1,6 +1,7 @@
 from django.forms import ModelForm, TextInput
 from .models import *
 
+
 class CreateCompanyForm(ModelForm):
     class Meta:
         model = Company
@@ -17,6 +18,7 @@ class CreateCompanyForm(ModelForm):
                 'placeholder': 'Краткое наименование предприятия'
                 }),
         }
+
 
 class UpdateCompanyForm(ModelForm):
     pass

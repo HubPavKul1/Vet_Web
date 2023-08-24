@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView
 from .models import *
 from .forms import *
+from app_animals.models import Animal
 
 
 class CompaniesListView(LoginRequiredMixin, ListView):
@@ -43,6 +44,15 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
     template_name = 'app_companies/company_detail.html'
     model = Company
     context_object_name = 'company'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # animals = Company.objects.get(slug=self.object.slug).animals.all()
+        animals = Animal.objects.filter(company__slug=self.object.slug, available=True)
+        employees = Employee.objects.filter(company__slug=self.object.slug, available=True)
+        context['animals'] = animals
+        context['employees'] = employees
+        return context
 
 
 

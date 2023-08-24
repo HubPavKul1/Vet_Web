@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
 
     'app_users.apps.AppUsersConfig',
     'app_companies.apps.AppCompaniesConfig',
+    'app_drugs.apps.AppDrugsConfig',
+    'app_vet_work.apps.AppVetWorkConfig',
+    'app_animals.apps.AppAnimalsConfig',
 
     # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/admindocs/
     'django.contrib.admindocs',
@@ -52,12 +56,19 @@ INSTALLED_APPS = [
 
     # https://django-crispy-forms.readthedocs.io/en/latest/install.html
     'crispy_forms',
+    'crispy_bootstrap4',
     # https://www.django-rest-framework.org/
     'rest_framework',
     'pytils',
+    # https://django-import-export.readthedocs.io/en/latest/
+    'import_export',
 
 
 ]
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

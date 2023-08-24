@@ -1,6 +1,13 @@
 from django.contrib import admin
 
 from .models import *
+from app_animals.models import Animal
+
+
+class AnimalInline(admin.TabularInline):
+    model = Animal
+    row_id_fields = ['company']
+    extra = 0
 
 
 class StreetInline(admin.TabularInline):
@@ -11,7 +18,7 @@ class StreetInline(admin.TabularInline):
 
 class EmployeeInline(admin.TabularInline):
     model = Employee
-    row_id_fields = ['position', 'company']
+    row_id_fields = ['company']
     extra = 0
 
 
@@ -30,12 +37,12 @@ class AddressInline(admin.TabularInline):
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("short_name", )}
-    inlines = [EmployeeInline, AddressInline]
+    inlines = [EmployeeInline, AddressInline, AnimalInline]
 
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("full_name", )}
+    pass
 
 
 @admin.register(City)
@@ -55,8 +62,7 @@ class AddressAdmin(admin.ModelAdmin):
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
-    inlines = [EmployeeInline]
-    extra = 0
+    pass
 
 
 
