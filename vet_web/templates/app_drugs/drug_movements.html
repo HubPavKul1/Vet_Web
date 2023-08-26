@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div id="colorlib-services">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+					<h2>Движение препаратов</h2>
+					<p><a class="btn btn-primary btn-lg" href="{% url 'create-drug-receipt' %}">Новое поступление</a></p>
+				</div>
+			</div>
+			<div class="row">
+				{% if drug_movements %}
+				{% if drug_movements|length > 1 %}
+				{% for drug_movement in drug_movements %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="{% url 'drug-movement' drug_movement.slug %}">{{drug_movement}}</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% elif drug_movements|length == 1 %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="{% url 'drug-movement' drug_movements.first.slug %}">{{drug_movements.first}}</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
+						</div>
+					</div>
+				</div>
+				{% else %}
+				<div>
+					<h2>Нет движения</h2>
+				</div>
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+					</div>
+				</div>
+				{% endif %}
+				{% endif %}
+
+			</div>
+		</div>
+</div>
+{% endblock %}

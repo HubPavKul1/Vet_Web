@@ -32,13 +32,14 @@ class Street(models.Model):
         db_table = 'streets'
         verbose_name = 'street'
         verbose_name_plural = 'streets'
+        ordering = ('name',)
 
 
 class Company(models.Model):
     """ Модель Предприятие """
-    full_name = models.CharField(max_length=255,
-                                 verbose_name='полное наименование',
-                                 blank=True)
+    name = models.CharField(max_length=255,
+                            verbose_name='полное наименование',
+                            blank=True)
     short_name = models.CharField(max_length=255,
                                   verbose_name='сокращенное наименование',
                                   blank=True)
@@ -58,6 +59,7 @@ class Company(models.Model):
         db_table = 'companies'
         verbose_name = 'company'
         verbose_name_plural = 'companies'
+        ordering = ('name',)
 
 
 class Address(models.Model):
@@ -102,6 +104,7 @@ class Position(models.Model):
         db_table = 'positions'
         verbose_name = 'position'
         verbose_name_plural = 'positions'
+        ordering = ('name',)
 
 
 class Employee(models.Model):
@@ -145,3 +148,4 @@ class Employee(models.Model):
         db_table = 'employees'
         verbose_name = 'employee'
         verbose_name_plural = 'employees'
+        ordering = ('last_name',)

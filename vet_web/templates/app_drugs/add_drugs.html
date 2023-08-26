@@ -6,13 +6,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 animate-box">
-            <h3>Регистрация Предприятия</h3>
+            <h3>Поступление препаратов</h3>
                 <form method="post">
                     {% csrf_token %}
-                    {{ form.name }} <br>
-                    {{ form.short_name}} <br>
+                    {{ form.as_p }}
                     <div class="form-group text-center">
-                        <input type="submit" value="Зарегистрировать" class="btn btn-primary">
+                        <input type="submit" value="Добавить" class="btn btn-primary">
                     </div>
                 </form>
         </div>

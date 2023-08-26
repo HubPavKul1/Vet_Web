@@ -41,6 +41,7 @@ class PlaceOfAdministration(admin.ModelAdmin):
 
 @admin.register(DrugMovement)
 class DrugMovement(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("operation", "operation_date")}
     inlines = [DrugInMovementInline]
 
 

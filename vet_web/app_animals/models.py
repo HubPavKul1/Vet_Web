@@ -16,6 +16,7 @@ class TypeOfFeeding(models.Model):
         db_table = 'types_of_feeding'
         verbose_name = 'type_of_feeding'
         verbose_name_plural = 'types_of_feeding'
+        ordering = ('name',)
 
 
 class AnimalGroup(models.Model):
@@ -37,6 +38,7 @@ class AnimalGroup(models.Model):
         db_table = 'animal_groups'
         verbose_name = 'animal_group'
         verbose_name_plural = 'animal_groups'
+        ordering = ('name',)
 
 
 class Species(models.Model):
@@ -52,6 +54,7 @@ class Species(models.Model):
         db_table = 'species'
         verbose_name = 'species'
         verbose_name_plural = 'species'
+        ordering = ('name',)
 
 
 class TypeOfUse(models.Model):
@@ -67,6 +70,7 @@ class TypeOfUse(models.Model):
         db_table = 'types_of_use'
         verbose_name = 'type_of_use'
         verbose_name_plural = 'types_of_use'
+        ordering = ('name',)
 
 
 class AnimalSex(models.Model):
@@ -82,6 +86,7 @@ class AnimalSex(models.Model):
         db_table = 'animals_sex'
         verbose_name = 'animal_sex'
         verbose_name_plural = 'animals_sex'
+        ordering = ('name',)
 
 
 class Animal(models.Model):
@@ -136,4 +141,5 @@ class Animal(models.Model):
         db_table = 'animals'
         verbose_name = 'animal'
         verbose_name_plural = 'animals'
+        ordering = ('animal_group', 'species', 'nickname',)
 

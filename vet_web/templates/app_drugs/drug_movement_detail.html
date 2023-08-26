@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div id="colorlib-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-16">
+                <div class="blog-wrap">
+                    <div class="row">
+                        <div class="col-md-16">
+                            <img class="img-responsive" src="images/blog-3.jpg" alt=""><br>
+                        </div>
+                        <div class="col-md-16">
+                            <div class="blog-desc col-paddingbottom">
+                                <h2><a href="#">{{drug_movement}}</a></h2>
+                                <div class="post-meta">
+                                    <span><a href="#"></a></span>
+                                    <span><a href="#"></a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-16">
+                            <div class="comment-area">
+                                <h2>Биопрепараты</h2>
+                                <div class="row">
+                                    <div class="comment-wrap">
+                                        <div class="row form-group">
+                                            <div class="col-md-4">
+                                                <strong>Наименование</strong>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <strong>Серия</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <strong>Дата изготовления</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <strong>Срок годности</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <strong>Ед. учета</strong>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <strong>Кол-во ед. учета</strong>
+                                            </div>
+<!--                                            <div class="col-md-2">-->
+<!--                                                <strong>Удалить</strong>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                    {% if drugs %}
+                                    <form action="#" method="post">
+                                        {% csrf_token %}
+                                    {% if drugs|length > 1%}
+                                    {% for drug in drugs %}
+                                    <div class="comment-wrap">
+                                        <div class="row form-group">
+                                            <div class="col-md-4">
+                                                {{drug.drug.name}}
+                                            </div>
+                                            <div class="col-md-1">
+                                                {{drug.batch}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drug.production_date}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drug.expiration_date}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drug.accounting_unit}}
+                                            </div>
+                                            <div class="col-md-1">
+                                                {{drug.units_amount}}
+                                            </div>
+<!--                                            <div class="col-md-2">-->
+<!--                                                <input type="checkbox" value={{drug.id}} name="boxes">-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% elif drugs|length == 1 %}
+                                    <div class="comment-wrap">
+                                        <div class="row form-group">
+                                            <div class="col-md-4">
+                                                {{drugs.first.drug.name}}
+                                            </div>
+                                            <div class="col-md-1">
+                                                {{drugs.first.batch}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drugs.first.production_date}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drugs.first.expiration_date}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{drugs.first.accounting_unit}}
+                                            </div>
+                                            <div class="col-md-1">
+                                                {{drugs.first.units_amount}}
+                                            </div>
+<!--                                            <div class="col-md-2">-->
+<!--                                                <input type="checkbox" value={{drugs.first.id}} name="boxes">-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="comment-wrap">
+                                        <h2>Препараты отсутствуют</h2>
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                        <div>
+                                            <input type="submit" value="Удалить" class="btn btn-primary">
+                                        </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="comment-area">
+                                <h2>Добавить препарат</h2>
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    {{form.as_p}}
+                                    <div class="form-group">
+                                        <input type="submit" value="Добавить" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <aside class="sidebar">
+                    <div class="side">
+                        <h2>Мероприятия</h2>
+                        <ul class="list">
+                            <li><a href="">Требование-заявка <i class="icon-check"></i> </a></li>
+                            <li><a href="#">Движение препаратов за месяц<i class="icon-check"></i> </a></li>
+                            <li><a href="#">Добавить исследование <i class="icon-check"></i> </a></li>
+                        </ul>
+                    </div>
+
+<!--                    <div class="side">-->
+<!--                        <h2>Recent Posts</h2>-->
+<!--                        <div class="post">-->
+<!--                            <a href="blog.html">-->
+<!--                                <div class="blog-img" style="background-image: url(images/blog-1.jpg);"></div>-->
+<!--                                <div class="desc">-->
+<!--                                    <span>01 Feb. 2017</span>-->
+<!--                                    <h3>Far far away, behind the word mountains, far from the countries</h3>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="post">-->
+<!--                            <a href="blog.html">-->
+<!--                                <div class="blog-img" style="background-image: url(images/blog-2.jpg);"></div>-->
+<!--                                <div class="desc">-->
+<!--                                    <span>01 Feb. 2017</span>-->
+<!--                                    <h3>Far far away, behind the word mountains, far from the countries</h3>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="post">-->
+<!--                            <a href="blog.html">-->
+<!--                                <div class="blog-img" style="background-image: url(images/blog-3.jpg);"></div>-->
+<!--                                <div class="desc">-->
+<!--                                    <span>01 Feb. 2017</span>-->
+<!--                                    <h3>Far far away, behind the word mountains, far from the countries</h3>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="side">-->
+<!--                        <h2><span>Para</span>graph</h2>-->
+<!--                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild-->
+<!--                            Question Marks-->
+<!--                            and devious Semikoli, but the Little Blind Text didn’t listen.</p>-->
+<!--                    </div>-->
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

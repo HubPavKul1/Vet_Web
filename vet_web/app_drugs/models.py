@@ -130,6 +130,12 @@ class DrugMovement(models.Model):
                                       null=True,
                                       blank=True
                                       )
+    slug = models.SlugField(max_length=255,
+                            verbose_name='url',
+                            help_text='unique url fragment based on the drug_movement operation and operation_date',
+                            null=True,
+                            blank=True
+                            )
 
     def __str__(self):
         return f'{self.operation} {self.operation_date}'

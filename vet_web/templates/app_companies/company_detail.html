@@ -14,10 +14,10 @@
                         </div>
                         <div class="col-md-12">
                             <div class="blog-desc col-paddingbottom">
-                                <h2><a href="#">{{ company.full_name }}</a></h2>
+                                <h2><a href="#">{{ company.name }}</a></h2>
                                 <div class="post-meta">
                                     <span><a href="#">Адрес: {{ company.address.first }}</a></span>
-                                    <span><a href="#">Представитель: {{employees.first.position.name }} {{employees.first}}</a></span>
+                                    <span><a href="#">Представитель: {{employees.position.name }} {{employees}}</a></span>
                                 </div>
                             </div>
                         </div>
@@ -48,10 +48,10 @@
                                         </div>
                                     </div>
                                     {% if animals %}
+                                    <form action="{% url 'del-animal' company.slug %}" method="post">
+                                        {% csrf_token %}
                                     {% if animals|length > 1%}
                                     {% for animal in animals %}
-                                    <form action="{% url 'animal-del' animal.id %}" method="post" class="form-control">
-                                        {% csrf_token %}
                                     <div class="comment-wrap">
                                         <div class="row form-group">
                                             <div class="col-md-2">
@@ -70,12 +70,10 @@
                                                 {{animal.identification}}
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="checkbox" id="del">
-                                                <input type="submit" value="выполнить" class="btn btn-primary">
+                                                <input type="checkbox" value={{animal.id}} name="boxes">
                                             </div>
                                         </div>
                                     </div>
-                                    </form>
                                     {% endfor %}
                                     {% elif animals|length == 1 %}
                                     <div class="comment-wrap">
@@ -95,6 +93,9 @@
                                             <div class="col-md-2">
                                                 {{animals.first.identification}}
                                             </div>
+                                            <div class="col-md-2">
+                                                <input type="checkbox" value={{animals.first.id}} name="boxes">
+                                            </div>
                                         </div>
                                     </div>
                                     {% else %}
@@ -103,47 +104,24 @@
                                     </div>
                                     {% endif %}
                                     {% endif %}
+                                        <div>
+                                            <input type="submit" value="Удалить" class="btn btn-primary">
+                                        </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
 
+
                         <div class="col-md-12">
                             <div class="comment-area">
-                                <h2>Leave a comment</h2>
-                                <form action="#">
-                                    <div class="row form-group">
-                                        <div class="col-md-6">
-                                            <!-- <label for="fname">First Name</label> -->
-                                            <input type="text" id="fname" class="form-control marginbottom"
-                                                   placeholder="Your firstname">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!-- <label for="lname">Last Name</label> -->
-                                            <input type="text" id="lname" class="form-control"
-                                                   placeholder="Your lastname">
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-md-12">
-                                            <!-- <label for="email">Email</label> -->
-                                            <input type="text" id="email" class="form-control"
-                                                   placeholder="Your email address">
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-md-12">
-                                            <!-- <label for="message">Message</label> -->
-                                            <textarea name="message" id="message" cols="30" rows="10"
-                                                      class="form-control"
-                                                      placeholder="Say something about us"></textarea>
-                                        </div>
-                                    </div>
+                                <h2>Добавить животное</h2>
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    {{form.as_p}}
                                     <div class="form-group">
-                                        <input type="submit" value="Post Comment" class="btn btn-primary">
+                                        <input type="submit" value="Добавить" class="btn btn-primary">
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -155,14 +133,17 @@
                     <div class="side">
                         <h2>Мероприятия</h2>
                         <ul class="list">
-                            <li><a href="#">Добавить сотрудника <i class="icon-check"></i> <span
-                                    class="badge badge-default badge-pill">7</span></a></li>
-                            <li><a href="#">Добавить животное <i class="icon-check"></i> <span
-                                    class="badge badge-default badge-pill">9</span></a></li>
-                            <li><a href="#">Добавить вакцинацию <i class="icon-check"></i> <span
-                                    class="badge badge-default badge-pill">10</span></a></li>
-                            <li><a href="#">Добавить исследование <i class="icon-check"></i> <span
-                                    class="badge badge-default badge-pill">12</span></a></li>
+<!--                            <li><a href="#">Загрузить животных из файла <i class="icon-check"></i></a></li>-->
+<!--                            <form method="post" action="" enctype="multipart/form-data">-->
+<!--                                {% csrf_token %}-->
+<!--                                <div class="form-group">-->
+<!--                                    <input type="file" name="file">-->
+<!--                                </div>-->
+<!--                                <button type="submit" class="btn btn-primary">Загрузить</button>-->
+<!--                            </form>-->
+                            <li><a href="#">Добавить сотрудника <i class="icon-check"></i> </a></li>
+                            <li><a href="#">Добавить вакцинацию <i class="icon-check"></i> </a></li>
+                            <li><a href="#">Добавить исследование <i class="icon-check"></i> </a></li>
                         </ul>
                     </div>
 
